@@ -9,18 +9,12 @@ class CommonBaseView(APIView):
     Base class for API views that utilize common functionalities.
 
     This class serves as a foundation for API views that share common logic or interact
-    with a common service layer. It inherits from Django REST framework's `APIView` class
-    to leverage its functionalities.
-
-    By inheriting from this class, other API views can access the `common_service` instance
-    and utilize its methods for handling common tasks efficiently.
+    with a common service layer.
     """
-
 
     def __init__(self) -> None:
         """
         Initializes the CommonBaseView instance.
-
         This constructor establishes a connection with the `common_service` instance API views.
         """
         self.common_service = CommonService()
@@ -37,15 +31,10 @@ class OrderAcknowledgeAPI(CommonBaseView):
     def post(self, request, po_id):
         """
         Acknowledges a purchase order.
+        ** POST http://127.0.0.1:8000/api/purchase_orders/{po_id}/acknowledge/ **
 
         This function handles POST requests to acknowledge a purchase order with the
-        provided `po_id`. It utilizes a try-except block to handle potential exceptions.
-
-        On success (if the purchase order is acknowledged), it returns a JSON response
-        containing a success message and a status code of 200 (OK).
-
-        On failure (including cases where the purchase order is not found), it returns
-        a JSON response with an error message and a status code of 404 (Not Found).
+        provided `po_id`.
         """
         try:
             ack_status = self.common_service.get_acknowledged_purchase_orders(po_id)
@@ -65,14 +54,10 @@ class CompletePurchaseOrderAPI(CommonBaseView):
         """
         Marks a purchase order as complete.
 
+        ** POST http://127.0.0.1:8000/api/purchase_orders/{po_id}/complete/ **
+
         This function handles POST requests to mark a purchase order with the provided `po_id`
-        as complete. It utilizes a try-except block to handle potential exceptions.
-
-        On success (if the purchase order is marked complete), it returns a JSON response
-        containing a success message and a status code of 200 (OK).
-
-        On failure (including cases where the purchase order is not found), it returns
-        a JSON response with an error message and a status code of 404 (Not Found).
+        as complete.
         """
         try:
             po_complete_status = self.common_service.completed_purchase_orders(po_id)
@@ -92,15 +77,10 @@ class UpdatePurchaseOrderQualityRatingAPI(CommonBaseView):
         """
         Updates the quality rating of a purchase order.
 
+        ** PATCH http://127.0.0.1:8000/api/purchase_orders/{po_id}/quality_rating/ **
+
         This function handles PATCH requests to update the quality rating of a purchase order
         with the provided `po_id`. It expects the quality rating information in the request body.
-        It utilizes a try-except block to handle potential exceptions.
-
-        On success (if the quality rating is updated), it returns a JSON response containing
-        a success message and a status code of 200 (OK).
-
-        On failure (including cases where the purchase order is not found or the update fails),
-        it returns a JSON response with an error message and a status code of 404 (Not Found).
         """
         try:
             po_quality_rating_status = self.common_service.update_quality_rating(po_id, request.data)

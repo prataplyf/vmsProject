@@ -16,8 +16,7 @@ class CommonService:
     Service class for handling common purchase order operations.
 
     This class provides methods for interacting with purchase orders, potentially
-    including tasks shared by multiple API views. It interacts with repositories
-    for purchase orders and vendors.
+    including tasks shared by multiple API views.
     """
 
     def __init__(self):
@@ -36,16 +35,6 @@ class CommonService:
         Acknowledges a purchase order by its ID.
 
         This function handles acknowledging a purchase order with the provided `po_id`.
-        It utilizes a try-except block to handle potential exceptions.
-
-        On success (if the purchase order is acknowledged), it returns 1 (consider
-        returning a more informative value or a success object).
-
-        On failure (including cases where the purchase order is not found or already
-        acknowledged), it raises an exception to be caught by the calling API view.
-
-        **Note:** Consider improving the error handling by returning specific exceptions
-        with informative messages instead of raising generic exceptions.
         """
         try:
             purchase_order = self.po_repo.get_purchased_order_by_id(po_id)
@@ -68,13 +57,6 @@ class CommonService:
         Marks a purchase order as completed.
 
         This function handles marking a purchase order with the provided `po_id` as completed.
-        It utilizes a try-except block to handle potential exceptions.
-
-        On success (if the purchase order is marked as completed), it returns 1 (consider
-        returning a more informative value or a success object).
-
-        On failure (including cases where the purchase order is not found or is already
-        completed or cancelled), it raises an exception to be caught by the calling API view.
         """
         try:            
             purchase_order = self.po_repo.get_purchased_order_by_id(po_id)
@@ -98,14 +80,6 @@ class CommonService:
 
         This function handles updating the quality rating of a purchase order with the provided
         `po_id`. It expects the quality rating information in the request data (`data`).
-        It utilizes a try-except block to handle potential exceptions.
-
-        On success (if the quality rating is updated), it returns 1 (consider returning
-        a more informative value or a success object).
-
-        On failure (including cases where the purchase order is not found, the status is not
-        'completed', or the update fails), it raises an exception to be caught by the calling
-        API view.
         """
         try:
             purchase_order = self.po_repo.get_purchased_order_by_id(po_id)

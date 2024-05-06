@@ -1,17 +1,12 @@
 import uuid
 from django.db import models
 from django.utils import timezone
-from django.db.models import signals
-
-STATUS_CHOICES = (
-    ('pending', 'Pending'),
-    ('completed', 'Completed'),
-    ('canceled', 'Canceled'),
-)
+from .constants.appConstants import STATUS_CHOICES
 
 
 class BaseModel(models.Model):
     uid = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -8,17 +8,10 @@ from ..services.vendorServices import VendorService
 class VendorBaseView(APIView):
     """
     Base class for all Vendor API views. Provides access to the VendorService instance.
-
-    This class serves as the foundation for all API views related to vendors in the application.
-    It inherits from Django REST framework's `APIView` class to leverage its functionalities.
-
     Key features of this base class include:
 
     - Access to the `vendor_service` instance: This instance provides methods for interacting
       with vendor data, such as retrieving, creating, updating, and deleting vendors.
-
-    By inheriting from this class, other vendor-related API views can access the `vendor_service`
-    instance and utilize its methods for handling vendor data efficiently.
     """
 
     def __init__(self) -> None:
@@ -36,14 +29,10 @@ class VendorListAPI(VendorBaseView):
     def get(self, request):
         """
         Retrieves a list of all vendors.
+        
+        **GET http://127.0.0.1:8000/api/vendors/**
 
-        This function retrieves a list of all vendors available in the application. 
-        It utilizes a try-except block to handle potential exceptions during retrieval.
-
-        On success, it returns a JSON response containing a list of vendor data,
-        a success message, and a status code of 200 (OK).
-
-        On failure, it returns a JSON response with an error message and a status code of 500 (Internal Server Error).
+        This function retrieves a list of all vendors available in the application.
         """
         try:
             all_vendors = self.vendor_service.get_all_vendors()
@@ -66,14 +55,8 @@ class VendorListAPI(VendorBaseView):
     def post(self, request):
         """
         Creates a new vendor.
-
+        **POST http://127.0.0.1:8000/api/vendors/**
         This function creates a new vendor using the data provided in the request body.
-        It utilizes a try-except block to handle potential exceptions during creation.
-
-        On success, it returns a JSON response containing the newly created vendor data,
-        a success message, and a status code of 201 (Created).
-
-        On failure, it returns a JSON response with an error message and a status code of 500 (Internal Server Error).
         """
         try:
             vendor = self.vendor_service.create_vendor(request.data)
@@ -97,24 +80,13 @@ class VendorListAPI(VendorBaseView):
 class VendorViewsAPI(VendorBaseView):
     """
     API endpoint for retrieving, updating, and deleting a specific vendor.
-
-    This class provides views for handling requests related to a specific vendor.
-    It inherits from the `VendorBaseView` class to access the `vendor_service` instance.
     """
 
     def get(self, request, vendor_id):
         """
         Retrieves a specific vendor's details.
-
+        ** GET http://127.0.0.1:8000/api/vendors/{vendor_id}/ **
         This function retrieves a vendor's details using the provided vendor ID.
-        It utilizes a try-except block to handle potential exceptions,
-        including cases where the vendor is not found.
-
-        On success, it returns a JSON response containing the retrieved vendor data,
-        a success message, and a status code of 200 (OK).
-
-        On failure (including cases where the vendor is not found), it returns a JSON
-        response with an error message and a status code of 404 (Not Found).
         """
         try:
             vendor = self.vendor_service.get_vendor_details(vendor_id)
@@ -138,16 +110,9 @@ class VendorViewsAPI(VendorBaseView):
     def put(self, request, vendor_id):
         """
         Updates a vendor's details.
-
+        ** PUT http://127.0.0.1:8000/api/vendors/{vendor_id}/ **
         This function updates a vendor's details using the provided vendor ID
-        and data from the request body. It utilizes a try-except block to handle
-        potential exceptions, including cases where the vendor is not found.
-
-        On success, it returns a JSON response containing the updated vendor data,
-        a success message, and a status code of 200 (OK).
-
-        On failure (including cases where the vendor is not found), it returns a JSON
-        response with an error message and a status code of 400 (Bad Request).
+        and data from the request body.
         """
         try:
             vendor = self.vendor_service.update_vendor(vendor_id, request.data)
@@ -166,16 +131,8 @@ class VendorViewsAPI(VendorBaseView):
     def delete(self, request, vendor_id):
         """
         Deletes a vendor.
-
-        This function deletes a vendor using the provided vendor ID. It utilizes a
-        try-except block to handle potential exceptions, including cases where the
-        vendor is not found.
-
-        On success, it returns a JSON response with a success message and a status
-        code of 204 (No Content).
-
-        On failure (including cases where the vendor is not found), it returns a JSON
-        response with an error message and a status code of 500 (Internal Server Error).
+        ** DELETE http://127.0.0.1:8000/api/vendors/{vendor_id}/ **
+        This function deletes a vendor using the provided vendor ID.
         """
         try:
             self.vendor_service.delete_vendor(vendor_id)
@@ -195,15 +152,8 @@ class VendorPerformanceView(VendorBaseView):
     def get(self, request, vendor_id):
         """
         Retrieves a specific vendor's performance data.
-
+        ** GET http://127.0.0.1:8000/api/vendors/{vendor_id}/performance/ **
         This function retrieves a vendor's performance data using the provided vendor ID.
-        It utilizes a try-except block to handle potential exceptions.
-
-        On success, it returns a JSON response containing the retrieved vendor performance 
-        data, a success message, and a status code of 200 (OK).
-
-        On failure (including cases where the vendor is not found), it returns a JSON 
-        response with an error message and a status code of 404 (Not Found).
         """
         try:
             vendor = self.vendor_service.get_vendor_performance(vendor_id)

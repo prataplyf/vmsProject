@@ -9,8 +9,7 @@ class VendorService:
     Service class for handling vendor data operations.
 
     This class provides methods for interacting with vendor data, such as retrieving,
-    creating, updating, and deleting vendors. It acts as a layer of abstraction
-    between the API views and the underlying vendor data repository.
+    creating, updating, and deleting vendors.
     """
 
     def __init__(self):
@@ -27,13 +26,6 @@ class VendorService:
         Retrieves a list of all vendors.
 
         This function fetches a list of all vendors from the vendor repository.
-        It utilizes a try-except block to handle potential exceptions during retrieval.
-
-        On success, it returns a serialized representation of all vendor data using
-        the `VendorSerializer` class.
-
-        On failure, it returns None (consider returning a more informative value
-        or raising a specific exception for better error handling).
         """
         try:
             vendors = self.vendorRepo.get_all_vendors()
@@ -49,15 +41,6 @@ class VendorService:
         Creates a new vendor.
 
         This function creates a new vendor using the provided vendor data.
-        It utilizes a try-except block to handle potential exceptions during creation.
-
-        On success, it validates the data using `VendorSerializer` and saves the new
-        vendor data to the repository. It then returns the serialized representation
-        of the created vendor.
-
-        On failure (including cases where the data is invalid), it returns None
-        (consider returning a more informative value or raising a specific exception
-        for better error handling).
         """
         try:
             serializer = VendorSerializer(data=vendor_data)
@@ -74,14 +57,6 @@ class VendorService:
         Retrieves a specific vendor's details.
 
         This function retrieves the details of a vendor using the provided vendor ID.
-        It utilizes a try-except block to handle potential exceptions during retrieval.
-
-        On success, it fetches the vendor data from the repository and returns a
-        serialized representation of the vendor using `VendorSerializer`.
-
-        On failure (including cases where the vendor is not found), it returns None
-        (consider returning a more informative value or raising a specific exception
-        for better error handling).
         """
         try:
             vendor = self.vendorRepo.get_vendor_by_id(vendor_id)
@@ -105,10 +80,6 @@ class VendorService:
 
         Returns:
             VendorSerializer: The updated vendor data serialized.
-
-        Raises:
-            NotFound: If the vendor with the provided ID is not found.
-            serializers.ValidationError: If the provided vendor data is invalid.
         """
 
         try:
@@ -132,13 +103,6 @@ class VendorService:
         Deletes a vendor.
 
         This function deletes a vendor using the provided vendor ID.
-        It utilizes a try-except block to handle potential exceptions during deletion.
-
-        On success, it calls the `delete_vendor` method of the vendor repository
-        and returns whatever value it returns (likely None or a confirmation message).
-
-        On failure, it returns None (consider returning a more informative value
-        or raising a specific exception for better error handling).
         """
         try:
             vendor = self.vendorRepo.delete_vendor(vendor_id)
@@ -153,15 +117,6 @@ class VendorService:
         Retrieves a specific vendor's performance data.
 
         This function retrieves the performance data of a vendor using the provided vendor ID.
-        It utilizes a try-except block to handle potential exceptions during retrieval.
-
-        On success, it fetches the vendor data from the repository and returns a
-        serialized representation of the vendor's performance data using
-        `VendorPerformanceSerializer`.
-
-        On failure (including cases where the vendor is not found), it returns None
-        (consider returning a more informative value or raising a specific exception
-        for better error handling).
         """
         try:
             vendor = self.vendorRepo.get_vendor_by_id(vendor_id)

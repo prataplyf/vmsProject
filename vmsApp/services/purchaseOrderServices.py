@@ -24,8 +24,6 @@ class PurhaseOrderService:
         Retrieves all purchase orders.
 
         This function retrieves a list of all purchase orders from the repository.
-        It utilizes a try-except block to handle potential exceptions during retrieval.
-
         Output:
             list or None:
                 On success, it returns a list of purchase orders in a format suitable for serialization
@@ -44,7 +42,6 @@ class PurhaseOrderService:
         Creates a new purchase order.
 
         This function creates a new purchase order based on the provided data.
-        It utilizes a try-except block to handle potential exceptions during creation.
 
         Args:
             data (dict): A dictionary containing purchase order details.
@@ -71,7 +68,6 @@ class PurhaseOrderService:
         Retrieves a specific purchase order.
 
         This function retrieves a purchase order with the provided `order_id` from the repository.
-        It utilizes a try-except block to handle potential exceptions during retrieval.
 
         Args:
             order_id (int): The ID of the purchase order to retrieve.
@@ -97,7 +93,6 @@ class PurhaseOrderService:
         Updates a purchase order.
 
         This function updates a purchase order with the provided `order_id` based on the given data.
-        It utilizes a try-except block to handle potential exceptions during update.
 
         Args:
             order_id (int): The ID of the purchase order to update.
@@ -128,7 +123,6 @@ class PurhaseOrderService:
         Deletes a purchase order.
 
         This function deletes a purchase order with the provided `order_id` from the repository.
-        It utilizes a try-except block to handle potential exceptions during deletion.
 
         Args:
             order_id (int): The ID of the purchase order to delete.
